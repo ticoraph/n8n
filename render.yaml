@@ -5,7 +5,7 @@ services:
     plan: free
     region: frankfurt  # change selon ta localisation (frankfurt, oregon, virginia, singapore)
     branch: master
-		dockerfilePath: ./Dockerfile
+    dockerfilePath: ./Dockerfile
     autoDeploy: true
 
     envVars:
@@ -27,8 +27,8 @@ services:
       - key: WEBHOOK_TUNNEL_URL
         value: "https://n8n.onrender.com"
 
-			- key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
-				value: true
+      - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+        value: true
 
       # Pour connecter une base PostgreSQL Render (optionnel)
       - key: DB_TYPE
