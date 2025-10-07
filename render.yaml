@@ -63,7 +63,7 @@ services:
     startCommand: |
       chmod 600 /home/node/.n8n/config || true
       n8n start
-			
+	
 databases:
   - name: n8n-db
     plan: free
