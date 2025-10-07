@@ -1,12 +1,11 @@
 services:
   - type: web
     name: n8n
-    runtime: image
     plan: free
+    env: docker
     region: frankfurt  # change selon ta localisation (frankfurt, oregon, virginia, singapore)
     branch: master
-    image:
-      url: docker.io/n8nio/n8n:latest
+    dockerfilePath: ./docker/images/n8n/Dockerfile
     autoDeploy: true
 
     envVars:
