@@ -5,7 +5,10 @@ services:
     plan: free
     region: frankfurt  # change selon ta localisation (frankfurt, oregon, virginia, singapore)
     branch: master
-    dockerfilePath: ./Dockerfile
+    image: n8nio/n8n:latest
+    disk:
+      name: n8n-data
+      mountPath: /home/node/.n8n
     autoDeploy: true
 
     envVars:
@@ -29,6 +32,9 @@ services:
 
       - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
         value: true
+
+      - key: GENERIC_TIMEZONE
+        value: 'Europe/Paris'
 
       # Pour connecter une base PostgreSQL Render (optionnel)
       - key: DB_TYPE
@@ -54,6 +60,10 @@ services:
           name: n8n-db
           property: password
 
+    startCommand: |
+      chmod 600 /home/node/.n8n/config || true
+      n8n start
+			
 databases:
   - name: n8n-db
     plan: free
