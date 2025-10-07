@@ -1,0 +1,55 @@
+services:
+  - type: web
+    name: n8n
+    env: docker
+    plan: free
+    region: frankfurt  # change selon ta localisation (frankfurt, oregon, virginia, singapore)
+    branch: master
+    autoDeploy: true
+
+    envVars:
+      - key: N8N_PORT
+        value: 5678
+
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+
+      - key: N8N_BASIC_AUTH_USER
+        sync: false  # à définir dans le dashboard Render
+      - key: N8N_BASIC_AUTH_PASSWORD
+        sync: false  # à définir dans le dashboard Render
+
+      - key: N8N_ENCRYPTION_KEY
+        sync: false  # à définir toi-même (ex : générer une clé 32 caractères)
+
+      # URL publique de ton app Render (tu la mettras après le 1er déploiement)
+      - key: WEBHOOK_TUNNEL_URL
+        value: "https://n8n.onrender.com"
+
+      # Pour connecter une base PostgreSQL Render (optionnel)
+      - key: DB_TYPE
+        value: "postgresdb"
+      - key: DB_POSTGRESDB_HOST
+        fromDatabase:
+          name: n8n-db
+          property: host
+      - key: DB_POSTGRESDB_PORT
+        fromDatabase:
+          name: n8n-db
+          property: port
+      - key: DB_POSTGRESDB_DATABASE
+        fromDatabase:
+          name: n8n-db
+          property: database
+      - key: DB_POSTGRESDB_USER
+        fromDatabase:
+          name: n8n-db
+          property: user
+      - key: DB_POSTGRESDB_PASSWORD
+        fromDatabase:
+          name: n8n-db
+          property: password
+
+databases:
+  - name: n8n-db
+    plan: free
