@@ -5,6 +5,7 @@ services:
     plan: free
     region: frankfurt  # change selon ta localisation (frankfurt, oregon, virginia, singapore)
     branch: master
+		dockerfilePath: ./Dockerfile
     autoDeploy: true
 
     envVars:
